@@ -12,12 +12,21 @@ RUN apt-get update && apt-get install -y \
 # Instala drivers dentro del venv de Superset
 # Forzamos psycopg2-binary porque tu stack usa el dialecto psycopg2
 RUN . /app/.venv/bin/activate && \
-    python -m ensurepip --upgrade && \
     python -m pip install --no-cache-dir -U pip setuptools wheel && \
     python -m pip install --no-cache-dir \
       "psycopg2-binary==2.9.9" \
       "mysqlclient==2.2.4" && \
-    python -c "import sys, psycopg2; print('PY:', sys.executable); print('psycopg2:', psycopg2.__version__)"
+      sqlalchemy-redshift \
+      snowflake-sqlalchemy \
+      snowflake-connector-python \
+      sqlalchemy-bigquery \
+      google-cloud-bigquery && \
+    python - <<EOF
+import sys
+print("PY:", sys.executable)
+import psycopg2
+print("psycopg2:", psycopg2.__version__)
+EOF
 
 ENV ADMIN_USERNAME $ADMIN_USERNAME
 ENV ADMIN_EMAIL $ADMIN_EMAIL
