@@ -15,7 +15,7 @@ RUN . /app/.venv/bin/activate && \
     python -m pip install --no-cache-dir -U pip setuptools wheel && \
     python -m pip install --no-cache-dir \
       "psycopg2-binary==2.9.9" \
-      "mysqlclient==2.2.4" && \
+      "mysqlclient==2.2.4" \
       sqlalchemy-redshift \
       snowflake-sqlalchemy \
       snowflake-connector-python \
