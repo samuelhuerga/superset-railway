@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 # Instala drivers dentro del venv de Superset
 # Forzamos psycopg2-binary porque tu stack usa el dialecto psycopg2
 RUN . /app/.venv/bin/activate && \
+    python -m ensurepip --upgrade && \
     python -m pip install --no-cache-dir -U pip setuptools wheel && \
     python -m pip install --no-cache-dir \
       "psycopg2-binary==2.9.9" \
